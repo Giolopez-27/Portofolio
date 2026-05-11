@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: #0a0a0a; color: #f0ede8; min-height: 100vh; overflow-x: hidden; }
+
+  .bg-shapes { position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 0; }
+  .shape { position: absolute; border-radius: 50%; opacity: 0.12; }
+  .shape-1 { width: 500px; height: 500px; background: radial-gradient(circle, #FF6B35, transparent); top: -100px; right: -100px; animation: float1 8s ease-in-out infinite; }
+  .shape-2 { width: 350px; height: 350px; background: radial-gradient(circle, #9B59B6, transparent); bottom: 100px; left: -80px; animation: float2 10s ease-in-out infinite; }
+  .shape-3 { width: 200px; height: 200px; background: radial-gradient(circle, #27AE60, transparent); top: 50%; left: 40%; animation: float3 7s ease-in-out infinite; }
+
+  @keyframes float1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-20px,20px)} }
+  @keyframes float2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(20px,-20px)} }
+  @keyframes float3 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-10px,15px)} }
+
+  .container { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; padding: 0 0 60px; }
+
+  .hero { padding: 60px 24px 40px; }
+  .hero-tag { display: inline-block; background: #FF6B35; color: #fff; font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; padding: 6px 14px; border-radius: 2px; margin-bottom: 20px; animation: fadeUp 0.6s ease both; }
+  .hero-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(52px, 10vw, 88px); line-height: 0.9; letter-spacing: 2px; color: #f0ede8; animation: fadeUp 0.7s ease 0.1s both; }
+  .hero-name span { color: #FF6B35; }
+  .hero-subtitle { font-size: 16px; font-weight: 300; color: #888; margin-top: 16px; letter-spacing: 0.5px; animation: fadeUp 0.7s ease 0.2s both; }
+  .school-badge { display: inline-flex; align-items: center; gap: 8px; background: #141414; border: 1px solid #2a2a2a; border-left: 3px solid #FF6B35; border-radius: 6px; padding: 10px 16px; margin-top: 18px; animation: fadeUp 0.7s ease 0.25s both; }
+  .school-badge span { font-size: 13px; color: #c8c5c0; font-weight: 300; }
+  .school-badge strong { color: #FF6B35; font-weight: 500; }
+  .hero-line { width: 60px; height: 3px; background: linear-gradient(90deg, #FF6B35, #9B59B6); margin-top: 24px; border-radius: 2px; animation: fadeUp 0.7s ease 0.3s both; }
+
+  .section { padding: 40px 24px; animation: fadeUp 0.8s ease 0.3s both; }
+  .section-label { font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: #FF6B35; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: #222; }
+
+  .about-text { font-size: 17px; font-weight: 300; line-height: 1.8; color: #c8c5c0; }
+  .about-text strong { color: #f0ede8; font-weight: 500; }
+
+  .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; }
+  .stat-card { background: #141414; border: 1px solid #1f1f1f; border-radius: 8px; padding: 20px 16px; text-align: center; transition: border-color 0.3s, transform 0.3s; }
+  .stat-card:hover { border-color: #FF6B35; transform: translateY(-2px); }
+  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 40px; color: #FF6B35; line-height: 1; }
+  .stat-label { font-size: 12px; color: #666; margin-top: 6px; font-weight: 300; letter-spacing: 0.5px; }
+
+  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 4px; }
+  .skill-card { background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 22px 20px; display: flex; align-items: flex-start; gap: 14px; transition: all 0.3s; }
+  .skill-card:hover { background: #161616; border-color: #333; transform: translateY(-3px); }
+  .skill-icon { width: 42px; height: 42px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .icon-orange { background: rgba(255,107,53,0.15); } .icon-purple { background: rgba(155,89,182,0.15); } .icon-green { background: rgba(39,174,96,0.15); } .icon-blue { background: rgba(52,152,219,0.15); }
+  .skill-info { flex: 1; }
+  .skill-name { font-size: 14px; font-weight: 500; color: #e8e5e0; margin-bottom: 6px; }
+  .skill-desc { font-size: 12px; color: #555; line-height: 1.5; font-weight: 300; }
+  .skill-bar-wrap { height: 3px; background: #222; border-radius: 2px; margin-top: 10px; overflow: hidden; }
+  .skill-bar { height: 100%; border-radius: 2px; animation: grow 1.2s ease 0.5s both; }
+  .bar-orange { background: #FF6B35; } .bar-purple { background: #9B59B6; } .bar-green { background: #27AE60; } .bar-blue { background: #3498DB; }
+  @keyframes grow { from { width: 0; } }
+
+  /* KYORUGI BANNER */
+  .kyorugi-banner { margin: 0 24px; background: linear-gradient(135deg, #1a0f00, #0f0a1a); border: 1px solid #2a1a0a; border-left: 4px solid #FF6B35; border-radius: 12px; padding: 24px; display: flex; align-items: center; gap: 20px; animation: fadeUp 0.8s ease 0.4s both; position: relative; overflow: hidden; }
+  .kyorugi-banner::before { content: '🥋'; position: absolute; right: 20px; top: 50%; transform: translateY(-50%); font-size: 64px; opacity: 0.08; }
+  .kb-icon { width: 56px; height: 56px; background: rgba(255,107,53,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0; border: 2px solid rgba(255,107,53,0.4); }
+  .kb-content { flex: 1; }
+  .kb-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #FF6B35; font-weight: 500; margin-bottom: 6px; }
+  .kb-title { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: #f0ede8; letter-spacing: 1px; line-height: 1; }
+  .kb-sub { font-size: 13px; color: #888; font-weight: 300; margin-top: 6px; }
+  .kb-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+  .kb-tag { font-size: 11px; padding: 4px 10px; border-radius: 20px; font-weight: 400; }
+  .tag-orange { background: rgba(255,107,53,0.15); color: #FF6B35; border: 1px solid rgba(255,107,53,0.3); }
+  .tag-gold { background: rgba(255,200,50,0.12); color: #FFD700; border: 1px solid rgba(255,200,50,0.3); }
+  .tag-purple { background: rgba(155,89,182,0.15); color: #9B59B6; border: 1px solid rgba(155,89,182,0.3); }
+
+  /* PRESTASI */
+  .prestasi-grid { display: flex; flex-direction: column; gap: 12px; margin-top: 4px; }
+
+  .prestasi-card { display: flex; align-items: center; gap: 16px; background: #111; border: 1px solid #1e1e1e; border-radius: 10px; padding: 18px 20px; transition: all 0.3s; position: relative; overflow: hidden; }
+  .prestasi-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; }
+  .prestasi-card.c-gold::before { background: #FFD700; }
+  .prestasi-card.c-blue::before { background: #3498DB; }
+  .prestasi-card.c-green::before { background: #27AE60; }
+  .prestasi-card:hover { background: #161616; transform: translateX(4px); }
+
+  .prestasi-medal { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+  .m-gold { background: rgba(255,215,0,0.12); border: 1px solid rgba(255,215,0,0.3); }
+  .m-blue { background: rgba(52,152,219,0.12); border: 1px solid rgba(52,152,219,0.3); }
+  .m-green { background: rgba(39,174,96,0.12); border: 1px solid rgba(39,174,96,0.3); }
+
+  .prestasi-info { flex: 1; }
+  .prestasi-event { font-size: 15px; font-weight: 500; color: #e8e5e0; margin-bottom: 4px; }
+  .prestasi-detail { font-size: 12px; color: #555; font-weight: 300; }
+
+  .prestasi-badge { font-size: 11px; padding: 4px 12px; border-radius: 20px; font-weight: 500; white-space: nowrap; flex-shrink: 0; }
+  .b-gold { background: rgba(255,215,0,0.12); color: #FFD700; border: 1px solid rgba(255,215,0,0.3); }
+  .b-blue { background: rgba(52,152,219,0.12); color: #3498DB; border: 1px solid rgba(52,152,219,0.3); }
+  .b-green { background: rgba(39,174,96,0.12); color: #27AE60; border: 1px solid rgba(39,174,96,0.3); }
+
+  /* MORE BANNER */
+  .more-banner {
+    margin: 0 24px;
+    border: 1px dashed #2a2a2a;
+    border-radius: 10px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: #0e0e0e;
+    animation: fadeUp 0.8s ease 0.5s both;
+  }
+  .more-left { display: flex; align-items: center; gap: 14px; }
+  .more-icon { font-size: 28px; }
+  .more-text { font-size: 14px; color: #888; font-weight: 300; line-height: 1.5; }
+  .more-text strong { color: #f0ede8; font-weight: 500; display: block; font-size: 15px; margin-bottom: 2px; }
+  .more-count {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: #FF6B35;
+    white-space: nowrap;
+    line-height: 1;
+    text-align: right;
+  }
+  .more-count span { display: block; font-family: 'DM Sans', sans-serif; font-size: 10px; color: #555; font-weight: 300; letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
+
+  /* CONTACT */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 4px; }
+  .contact-btn { display: flex; align-items: center; gap: 10px; padding: 16px 18px; background: #111; border: 1px solid #222; border-radius: 8px; text-decoration: none; color: #888; font-size: 13px; font-weight: 400; transition: all 0.25s; word-break: break-all; }
+  .contact-btn:hover { background: #FF6B35; border-color: #FF6B35; color: #fff; transform: translateY(-2px); }
+  .contact-btn .ci { font-size: 18px; flex-shrink: 0; }
+  .contact-info { display: flex; flex-direction: column; gap: 2px; }
+  .contact-platform { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.6; }
+  .contact-value { font-size: 12px; }
+
+  .footer { text-align: center; padding: 40px 24px 20px; font-size: 12px; color: #333; letter-spacing: 1px; text-transform: uppercase; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 480px) { .skills-grid { grid-template-columns: 1fr; } .contact-grid { grid-template-columns: 1fr; } .kyorugi-banner { flex-direction: column; text-align: center; } .more-banner { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="bg-shapes">
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+  <div class="shape shape-3"></div>
+</div>
+
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-tag">✦ Portofolio Siswa & Atlet</div>
+    <div class="hero-name">Giovanni<br>Griselda <span>Tobing</span></div>
+    <div class="hero-subtitle">Atlet Taekwondo · Kyorugi · Kejuaraan Nasional</div>
+    <div class="school-badge">
+      <span>🏫</span>
+      <span><strong>SMA Holy Faithful Obedient</strong></span>
+    </div>
+    <div class="hero-line"></div>
+  </div>
+
+  <!-- KYORUGI BANNER -->
+  <div class="kyorugi-banner">
+    <div class="kb-icon">🥋</div>
+    <div class="kb-content">
+      <div class="kb-label">Spesialisasi Utama</div>
+      <div class="kb-title">Kyorugi Taekwondo</div>
+      <div class="kb-sub">Atlet aktif kejuaraan tingkat nasional</div>
+      <div class="kb-tags">
+        <span class="kb-tag tag-orange">Sparring / Pertarungan</span>
+        <span class="kb-tag tag-gold">Kejuaraan Nasional</span>
+        <span class="kb-tag tag-purple">Taekwondo</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TENTANG SAYA -->
+  <div class="section">
+    <div class="section-label">Tentang Saya</div>
+    <p class="about-text">
+      Halo! Saya <strong>Giovanni Griselda Tobing</strong>, siswa <strong>SMA Holy Faithful Obedient</strong> sekaligus atlet aktif <strong>Kyorugi Taekwondo</strong>. Saya telah mengikuti berbagai kejuaraan nasional bergengsi dan terus berlatih keras untuk meraih prestasi lebih tinggi di dunia taekwondo.
+    </p>
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num">3+</div>
+        <div class="stat-label">Kejuaraan nasional</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">🥋</div>
+        <div class="stat-label">Kyorugi specialist</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">💪</div>
+        <div class="stat-label">Pantang menyerah</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KEAHLIAN -->
+  <div class="section">
+    <div class="section-label">Keahlian</div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon icon-orange">🥋</div>
+        <div class="skill-info">
+          <div class="skill-name">Kyorugi Taekwondo</div>
+          <div class="skill-desc">Sparring & teknik tendangan kompetitif tingkat nasional</div>
+          <div class="skill-bar-wrap"><div class="skill-bar bar-orange" style="width:93%"></div></div>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon icon-purple">🏃</div>
+        <div class="skill-info">
+          <div class="skill-name">Atletik</div>
+          <div class="skill-desc">Lari, lompat, dan cabang atletik lapangan lainnya</div>
+          <div class="skill-bar-wrap"><div class="skill-bar bar-purple" style="width:82%"></div></div>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon icon-green">🎯</div>
+        <div class="skill-info">
+          <div class="skill-name">Fokus & Strategi</div>
+          <div class="skill-desc">Membaca lawan dan bertindak tepat di bawah tekanan</div>
+          <div class="skill-bar-wrap"><div class="skill-bar bar-green" style="width:90%"></div></div>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon icon-blue">🤝</div>
+        <div class="skill-info">
+          <div class="skill-name">Kepemimpinan</div>
+          <div class="skill-desc">Jiwa sportif dan kemampuan memimpin tim saat latihan</div>
+          <div class="skill-bar-wrap"><div class="skill-bar bar-blue" style="width:75%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRESTASI LOMBA -->
+  <div class="section">
+    <div class="section-label">Prestasi Lomba</div>
+    <div class="prestasi-grid">
+
+      <div class="prestasi-card c-gold">
+        <div class="prestasi-medal m-gold">🏆</div>
+        <div class="prestasi-info">
+          <div class="prestasi-event">Piala Pangkostrad</div>
+          <div class="prestasi-detail">Kejuaraan Taekwondo Kyorugi · Tingkat Nasional</div>
+        </div>
+        <div class="prestasi-badge b-gold">Nasional</div>
+      </div>
+
+      <div class="prestasi-card c-blue">
+        <div class="prestasi-medal m-blue">🥋</div>
+        <div class="prestasi-info">
+          <div class="prestasi-event">Kejuaraan CNN</div>
+          <div class="prestasi-detail">Kompetisi Taekwondo Kyorugi · Tingkat Nasional</div>
+        </div>
+        <div class="prestasi-badge b-blue">Nasional</div>
+      </div>
+
+      <div class="prestasi-card c-green">
+        <div class="prestasi-medal m-green">🏅</div>
+        <div class="prestasi-info">
+          <div class="prestasi-event">Kejuaraan Nasional Lainnya</div>
+          <div class="prestasi-detail">Kompetisi Taekwondo Kyorugi · Tingkat Nasional</div>
+        </div>
+        <div class="prestasi-badge b-green">Nasional</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MORE BANNER -->
+  <div class="more-banner">
+    <div class="more-left">
+      <div class="more-icon">🔥</div>
+      <div class="more-text">
+        <strong>Dan masih banyak lagi...</strong>
+        Aktif mengikuti berbagai kejuaraan taekwondo kyorugi di tingkat nasional — perjalanan masih terus berlanjut!
+      </div>
+    </div>
+    <div class="more-count">
+      3+
+      <span>Kejuaraan nasional</span>
+    </div>
+  </div>
+
+  <!-- KONTAK -->
+  <div class="section">
+    <div class="section-label">Hubungi Saya</div>
+    <div class="contact-grid">
+      <a class="contact-btn" href="mailto:griselda310125@gmail.com">
+        <i class="ti ti-mail ci"></i>
+        <div class="contact-info">
+          <span class="contact-platform">Email</span>
+          <span class="contact-value">griselda310125@gmail.com</span>
+        </div>
+      </a>
+      <a class="contact-btn" href="https://instagram.com/giovanni.griselda" target="_blank">
+        <i class="ti ti-brand-instagram ci"></i>
+        <div class="contact-info">
+          <span class="contact-platform">Instagram</span>
+          <span class="contact-value">@giovanni.griselda</span>
+        </div>
+      </a>
+      <a class="contact-btn" href="https://wa.me/62881024832369" target="_blank">
+        <i class="ti ti-brand-whatsapp ci"></i>
+        <div class="contact-info">
+          <span class="contact-platform">WhatsApp</span>
+          <span class="contact-value">0881024832369</span>
+        </div>
+      </a>
+      <div class="contact-btn">
+        <i class="ti ti-school ci"></i>
+        <div class="contact-info">
+          <span class="contact-platform">Sekolah</span>
+          <span class="contact-value">SMA Holy Faithful Obedient</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">Giovanni Griselda Tobing · Atlet Kyorugi Taekwondo · 2025</div>
+
+</div>
+</body>
+</html>
